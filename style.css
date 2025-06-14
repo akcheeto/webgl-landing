@@ -182,12 +182,18 @@ a {
     width: 60px;
   }
   .special { font-size: 1.5rem; }
+
+
   .minText { font-size: 1rem; }
+
+
   .ps-note {
     font-size: 1.2rem;
     left: 1rem;
     padding: 0.3rem 0.8rem;
   }
+
+
   .ps-note::before {
     left: -1.5rem;
     border-top: 1.2rem solid transparent;
@@ -196,3 +202,34 @@ a {
   }
 }
 
+@media (max-width: 600px) {
+  /* Enlarge overlay headline */
+  #mobileOverlay {
+    font-size: 3.5rem;
+  }
+
+  /* Bigger logo */
+  #mobileOverlay .logo {
+    width: 4rem;
+    height: auto;
+  }
+
+  /* Larger name/title */
+  #mobileOverlay .special {
+    font-size: 2.5rem;
+  }
+  #mobileOverlay .minText {
+    font-size: 1.8rem;
+  }
+
+  /* Enlarge card padding & add grey background */
+  #mobileOverlay .portfolio-content {
+    background-color: #808080;
+    padding: 40px 50px;
+  }
+
+  /* Space below the slogan */
+  #mobileOverlay .portfolio-button {
+    margin-top: 2rem !important;
+  }
+}
