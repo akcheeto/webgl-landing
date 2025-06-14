@@ -224,8 +224,8 @@ a {
 
   /* Enlarge card padding & add grey background */
   #mobileOverlay .portfolio-content {
+    background-color: #505050;
     padding: 40px 50px;
-    background: none;
   }
 
   /* Space below the slogan */
