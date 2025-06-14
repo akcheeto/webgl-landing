@@ -226,6 +226,7 @@ a {
   #mobileOverlay .portfolio-content {
     padding: 40px 50px;
     background: none;
+    border: 1px solid #040404;
   }
 
   /* Space below the slogan */
