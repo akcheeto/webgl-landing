@@ -224,7 +224,7 @@ a {
 
   /* Enlarge card padding & add grey background */
   #mobileOverlay .portfolio-content {
-    background-color: #505050;
+    background-color: transparent;
     padding: 40px 50px;
   }
 
