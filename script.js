@@ -114,7 +114,7 @@ class CreateParticles {
     this.buttom = false;
 
     this.data = {
-      text: '    INVENT\nTHE FUTURE',
+      text: '    CREATE\nTHE FUTURE',
       amount: 1500,
       particleSize: 1,
       particleColor: 0xffffff,
