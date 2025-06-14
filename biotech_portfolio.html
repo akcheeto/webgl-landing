@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Akshit Monga</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -338,6 +339,17 @@
             color: #00f5ff;
         }
         
+        /* ensure the inverted-logo img fits */
+        .logo {
+          display: inline-block;
+        }
+
+        .logo img {
+        width: 3rem;      /* adjust size to taste */
+        height: auto;
+        object-fit: contain;
+        }
+
         /* Projects Section */
         .projects {
             max-width: 1200px;
@@ -715,7 +727,9 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <a href="./index.html" class="logo">AM</a>
+            <a href="./index.html" class="logo">
+                <img src="AM Logo Inverted.png" alt="AM Logo Inverted" />
+            </a>
             <ul class="nav-links">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -783,8 +797,12 @@
                         this.style.transform='translateY(0) scale(1)'; 
                         this.style.boxShadow='none'; 
                         this.style.borderColor='rgba(255, 255, 255, 0.1)'">
-        <span style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.3rem;"></span>
+          <span style="display: flex; align-items: center; gap: 10px;">
+            <img
+              src="./AM Logo Inverted.png"
+              alt="AM Logo Inverted"
+              style="width: 2.5rem; height: auto; display: block;"
+            />
             My Resume
         </span>
     </button>
@@ -828,9 +846,13 @@ function toggleResume() {
                 // Update button text
                 toggleBtn.innerHTML = `
                 <span style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.3rem;"></span>
-                    Hide Resume
-                    </span>
+                    <img
+                  src="./AM Logo Inverted.png"
+                  alt="AM Logo Inverted"
+                  style="width: 2.5rem; height: auto; display: block;"
+                />
+                Hide Resume
+                </span>
                     `;
                     // Smooth scroll to resume
                     setTimeout(() => {
@@ -846,9 +868,14 @@ function toggleResume() {
                         // Update button text
                         toggleBtn.innerHTML = `
                         <span style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 1.3rem;"></span>
-                        My Resume!
-                        </span>
+                        <span style="display: flex; align-items: center; gap: 10px;">
+                <img
+                  src="./AM Logo Inverted.png"
+                  alt="AM Logo Inverted"
+                      style="width: 2.5rem; height: auto; display: block;"
+                 />
+                  My Resume
+                  </span>
                       `;
                     }
                 }

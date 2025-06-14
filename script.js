@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 600) {
+    // 1) kill the 3D canvas
+    const magic = document.getElementById('magic');
+    if (magic) magic.style.display = 'none';
+
+    // 2) hide the “psst…” note
+    document.querySelectorAll('.ps-note').forEach(el => el.style.display = 'none');
+
+    // 3) flag mobile for CSS
+    document.body.classList.add('mobile');
+
+    // 4) stop further WebGL/setup
+    return;
+  }
+});
+
+
 const preload = () => {
   let manager = new THREE.LoadingManager();
   manager.onLoad = function () {
