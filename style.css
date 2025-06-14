@@ -50,6 +50,13 @@ html, body {
   font-size: 14px;
 }
 
+.logo {
+  width: 4rem;    /* or whatever size fits */
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
 a {
   color: white;
   font-size: 12px;
