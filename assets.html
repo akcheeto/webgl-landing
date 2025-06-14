@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOWLY_TARNISHED.exe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+        
+        :root {
+            --warning-red: #FF0000;
+            --terminal-green: #00FF41;
+            --amber: #FFBF00;
+            --blood: #8B0000;
+            --static: #1a1a1a;
+            --corrupt: #FF00FF;
+        }
+        
+        body {
+            background: #000;
+            color: var(--terminal-green);
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--terminal-green);
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+        
+        .cursor.error {
+            border-color: var(--warning-red);
+            transform: scale(1.5);
+        }
+        
+        /* CRT Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+        
+        /* Scanline */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: scanline 8s linear infinite;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        /* Main Terminal */
+        .terminal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        
+        .terminal-header {
+            border: 2px solid var(--terminal-green);
+            padding: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .terminal-header h1 {
+            font-size: 24px;
+            text-align: center;
+            animation: flicker 0.15s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid var(--warning-red);
+            padding: 40px;
+            text-align: center;
+            animation: glitch 2s infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { transform: translate(-50%, -50%); }
+            20% { transform: translate(-48%, -50%); }
+            40% { transform: translate(-52%, -50%); }
+            60% { transform: translate(-50%, -48%); }
+            80% { transform: translate(-50%, -52%); }
+        }
+        
+        .warning-box h2 {
+            color: var(--warning-red);
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--warning-red);
+        }
+        
+        .warning-text {
+            color: var(--amber);
+            font-size: 24px;
+            line-height: 1.5;
+        }
+        
+        /* System Messages */
+        .system-log {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--terminal-green);
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .system-log::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
+            animation: scan 3s infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .log-entry {
+            margin: 10px 0;
+            opacity: 0;
+            animation: typeIn 0.1s forwards;
+        }
+        
+        @keyframes typeIn {
+            to { opacity: 1; }
+        }
+        
+        .error {
+            color: var(--warning-red);
+            animation: blink 0.5s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .corrupted {
+            color: var(--corrupt);
+            text-shadow: -2px 0 var(--warning-red), 2px 0 var(--terminal-green);
+            animation: corrupt 0.1s infinite;
+        }
+        
+        @keyframes corrupt {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-1px); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* Memory Dump */
+        .memory-dump {
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            color: var(--amber);
+            white-space: pre;
+            overflow: hidden;
+            margin: 20px 0;
+            opacity: 0.6;
+        }
+        
+        /* Glitch Text */
+        .glitch-text {
+            position: relative;
+            color: var(--terminal-green);
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            animation: glitch-1 0.3s infinite;
+            color: var(--warning-red);
+            z-index: -1;
+        }
+        
+        .glitch-text::after {
+            animation: glitch-2 0.3s infinite;
+            color: var(--terminal-green);
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            25% { clip: rect(0, 900px, 20px, 0); }
+            50% { clip: rect(50px, 900px, 90px, 0); }
+            75% { clip: rect(20px, 900px, 60px, 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            25% { clip: rect(30px, 900px, 60px, 0); }
+            50% { clip: rect(10px, 900px, 40px, 0); }
+            75% { clip: rect(80px, 900px, 100px, 0); }
+        }
+        
+        /* Status Monitor */
+        .status-monitor {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--terminal-green);
+            padding: 20px;
+            font-size: 14px;
+            width: 300px;
+        }
+        
+        .status-line {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .critical {
+            color: var(--warning-red);
+            font-weight: bold;
+        }
+        
+        /* Interference */
+        .interference {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Hidden Messages */
+        .hidden-message {
+            position: absolute;
+            color: var(--blood);
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 3s;
+        }
+        
+        .hidden-message.reveal {
+            opacity: 0.3;
+        }
+        
+        /* Distortion Effect */
+        .distort {
+            animation: distort 5s infinite;
+        }
+        
+        @keyframes distort {
+            0%, 100% { filter: blur(0px) contrast(1); }
+            50% { filter: blur(1px) contrast(1.5); }
+        }
+        
+        /* Emergency Button */
+        .emergency-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--warning-red);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            text-transform: uppercase;
+            cursor: none;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .emergency-button:hover {
+            background: #000;
+            color: var(--warning-red);
+            border: 2px solid var(--warning-red);
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="scanline"></div>
+    <div class="interference"></div>
+    
+    <button class="emergency-button" onclick="emergency()">EMERGENCY STOP</button>
+    
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <h1>LOWLY_TARNISHED.exe - SYSTEM TERMINAL v0.666</h1>
+        </div>
+        
+        <div class="warning-box" id="warningBox">
+            <h2>⚠ WARNING ⚠</h2>
+            <p class="warning-text">UNAUTHORIZED ACCESS DETECTED</p>
+            <p class="warning-text">SYSTEM INTEGRITY: <span class="error">COMPROMISED</span></p>
+            <p class="warning-text corrupted">YOU DIED</p>
+        </div>
+        
+        <div class="system-log">
+            <div class="log-entry" style="animation-delay: 0.1s">> INITIALIZING SYSTEM...</div>
+            <div class="log-entry" style="animation-delay: 0.5s">> LOADING PLAYER_DATA.dat</div>
+            <div class="log-entry error" style="animation-delay: 1s">> ERROR: MEMORY CORRUPTION DETECTED</div>
+            <div class="log-entry" style="animation-delay: 1.5s">> ATTEMPTING RECOVERY...</div>
+            <div class="log-entry" style="animation-delay: 2s">> SOULS: <span class="corrupted">NULL</span></div>
+            <div class="log-entry error" style="animation-delay: 2.5s">> WARNING: MAIDEN NOT FOUND</div>
+            <div class="log-entry" style="animation-delay: 3s">> DEATH_COUNT: <span class="error">OVERFLOW</span></div>
+        </div>
+        
+        <div class="memory-dump">
+0x00000000  4C 4F 57 4C 59 20 54 41  52 4E 49 53 48 45 44 00  |LOWLY TARNISHED.|
+0x00000010  59 4F 55 20 44 49 45 44  00 00 00 00 00 00 00 00  |YOU DIED........|
+0x00000020  47 49 54 20 47 55 44 00  00 00 00 00 00 00 00 00  |GIT GUD.........|
+0x00000030  <span class="error">XX XX XX XX XX XX XX XX  XX XX XX XX XX XX XX XX</span>  |CORRUPTED DATA..|
+        </div>
+        
+        <div class="system-log distort">
+            <h3 class="glitch-text" data-text="SYSTEM STATUS">SYSTEM STATUS</h3>
+            <div class="log-entry">> HEALTH: <span class="critical">CRITICAL</span></div>
+            <div class="log-entry">> STAMINA: <span class="error">DEPLETED</span></div>
+            <div class="log-entry">> SANITY: <span class="corrupted">ERROR_UNDEFINED</span></div>
+            <div class="log-entry">> GRACE: <span class="error">ACCESS DENIED</span></div>
+        </div>
+        
+        <div class="hidden-message" style="top: 200px; left: 100px;">you cannot escape</div>
+        <div class="hidden-message" style="top: 400px; right: 150px;">the cycle continues</div>
+        <div class="hidden-message" style="bottom: 100px; left: 300px;">lowly tarnished</div>
+    </div>
+    
+    <div class="status-monitor">
+        <h4>VITAL SIGNS MONITOR</h4>
+        <div class="status-line">
+            <span>CPU TEMP:</span>
+            <span class="critical">OVERHEATING</span>
+        </div>
+        <div class="status-line">
+            <span>MEMORY:</span>
+            <span class="error">CORRUPTED</span>
+        </div>
+        <div class="status-line">
+            <span>DISK:</span>
+            <span>FRAGMENTING...</span>
+        </div>
+        <div class="status-line">
+            <span>NETWORK:</span>
+            <span class="corrupted">ISOLATED</span>
+        </div>
+        <div class="status-line">
+            <span>USER STATUS:</span>
+            <span class="error">DECEASED</span>
+        </div>
+    </div>
+    
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Glitch effects on hover
+        document.addEventListener('click', () => {
+            cursor.classList.add('error');
+            setTimeout(() => cursor.classList.remove('error'), 200);
+            
+            // Add screen shake
+            document.body.style.animation = 'shake 0.2s';
+            setTimeout(() => document.body.style.animation = '', 200);
+        });
+        
+        // Random glitches
+        setInterval(() => {
+            const elements = document.querySelectorAll('.log-entry');
+            const randomElement = elements[Math.floor(Math.random() * elements.length)];
+            randomElement.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+            setTimeout(() => randomElement.style.transform = '', 100);
+        }, 3000);
+        
+        // Reveal hidden messages
+        setTimeout(() => {
+            document.querySelectorAll('.hidden-message').forEach((msg, index) => {
+                setTimeout(() => msg.classList.add('reveal'), index * 2000);
+            });
+        }, 5000);
+        
+        // Warning box flicker
+        setInterval(() => {
+            const warningBox = document.getElementById('warningBox');
+            warningBox.style.opacity = Math.random() > 0.1 ? '1' : '0.8';
+        }, 100);
+        
+        // Emergency button
+        function emergency() {
+            document.body.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: red; font-size: 48px; font-family: VT323, monospace;">SYSTEM FAILURE</div>';
+            document.body.style.background = '#000';
+        }
+        
+        // Add screen shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Random system messages
+        const messages = [
+            'MEMORY LEAK DETECTED',
+            'STACK OVERFLOW',
+            'SEGMENTATION FAULT',
+            'KERNEL PANIC',
+            'CRITICAL ERROR',
+            'SYSTEM COMPROMISED',
+            'DATA CORRUPTION',
+            'ACCESS VIOLATION'
+        ];
+        
+        setInterval(() => {
+            const log = document.querySelector('.system-log');
+            const newEntry = document.createElement('div');
+            newEntry.className = 'log-entry error';
+            newEntry.textContent = `> ${messages[Math.floor(Math.random() * messages.length)]}`;
+            log.appendChild(newEntry);
+            
+            // Remove old entries
+            if (log.children.length > 10) {
+                log.removeChild(log.children[0]);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
