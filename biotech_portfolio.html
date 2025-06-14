@@ -15,7 +15,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
             color: #ffffff;
             overflow-x: hidden;
             scroll-behavior: smooth;
@@ -101,6 +101,27 @@
             }
         }
         
+        /* Github */
+        .project-footer {
+        margin-top: 1rem;
+        text-align: center;
+        }
+
+        .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+         background-color: #0070f3;
+         color: #fff;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: 500;
+        }
+
+        .btn:hover {
+        opacity: 0.9;
+        }
+
+
         /* Header */
         .header {
             position: fixed;
@@ -694,7 +715,7 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <a href="#" class="logo">AM</a>
+            <a href="./index.html" class="logo">AM</a>
             <ul class="nav-links">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -736,6 +757,102 @@
                     </div>
                 </a>
             </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+    <button onclick="toggleResume()" 
+            id="resumeToggleBtn"
+            style="display: inline-block; 
+                   background: rgba(255, 255, 255, 0.05); 
+                   backdrop-filter: blur(10px); 
+                   border: 1px solid rgba(255, 255, 255, 0.1); 
+                   color: #00f5ff; 
+                   padding: 20px 50px; 
+                   border-radius: 30px; 
+                   font-size: 1.2rem; 
+                   font-weight: 600; 
+                   transition: all 0.3s ease; 
+                   cursor: pointer; 
+                   position: relative; 
+                   overflow: hidden;
+                   outline: none;"
+            onmouseover="this.style.background='rgba(0, 245, 255, 0.1)'; 
+                         this.style.transform='translateY(-5px) scale(1.02)'; 
+                         this.style.boxShadow='0 20px 40px rgba(0, 245, 255, 0.2)'; 
+                         this.style.borderColor='rgba(0, 245, 255, 0.3)'"
+            onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; 
+                        this.style.transform='translateY(0) scale(1)'; 
+                        this.style.boxShadow='none'; 
+                        this.style.borderColor='rgba(255, 255, 255, 0.1)'">
+        <span style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;"></span>
+            My Resume
+        </span>
+    </button>
+</div>
+
+<!-- Resume Container (hidden by default) -->
+<div id="resumeContainer" 
+     style="display: none; 
+            max-width: 900px; 
+            margin: 40px auto; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 20px; 
+            padding: 30px; 
+            opacity: 0; 
+            transform: translateY(-20px); 
+            transition: all 0.5s ease;">
+    <iframe src="./Akshit Monga - Biomedical Engineer.pdf" 
+            style="width: 100%; 
+                   height: 800px; 
+                   border: none; 
+                   border-radius: 10px;">
+    </iframe>
+</div>
+
+
+<script>
+function toggleResume() {
+    const resumeContainer = document.getElementById('resumeContainer');
+    const toggleBtn = document.getElementById('resumeToggleBtn');
+    
+    if (resumeContainer.style.display === 'none' || resumeContainer.style.display === '') {
+        // Show resume
+        resumeContainer.style.display = 'block';
+        // Trigger animation
+        setTimeout(() => {
+            resumeContainer.style.opacity = '1';
+            resumeContainer.style.transform = 'translateY(0)';
+                 }, 10);
+                // Update button text
+                toggleBtn.innerHTML = `
+                <span style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.3rem;"></span>
+                    Hide Resume
+                    </span>
+                    `;
+                    // Smooth scroll to resume
+                    setTimeout(() => {
+                        resumeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                    } else {
+                    // Hide resume
+                    resumeContainer.style.opacity = '0';
+                    resumeContainer.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        resumeContainer.style.display = 'none';
+                    }, 500);
+                        // Update button text
+                        toggleBtn.innerHTML = `
+                        <span style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3rem;"></span>
+                        My Resume!
+                        </span>
+                      `;
+                    }
+                }
+            </script>
         </section>
 
         <!-- Experience Section -->
@@ -754,14 +871,13 @@
                     <div class="experience-date">08/2024 - 06/2025</div>
                 </div>
                 <div class="experience-description">
-                    <p>Contributing to biomedical R&D operations through hands-on laboratory work, equipment management, and AI-enhanced process optimization in a regulated manufacturing environment.</p>
                     <ul class="experience-highlights">
-                        <li>Execute standard operating procedures (SOPs) for laboratory equipment handling and maintenance</li>
-                        <li>Conduct biocompatibility testing and material characterization using multiple analytical techniques</li>
-                        <li>Manage sample preparation, data collection, and documentation for regulatory compliance</li>
-                        <li>Developed AI assistant for Design for Manufacturing (DfM), accelerating design information retrieval by 80%</li>
-                        <li>Collaborate with cross-functional teams including manufacturing engineers and regulatory specialists</li>
-                        <li>Maintain detailed laboratory notebooks and assist in technical report preparation</li>
+                        <li>Contributed to R&D operations at Jabil and gained formal lab training in most common instrumentation and analytical techniques</li>
+                        <li>Gained experience in experimental design (DOE), execution of Standard Operating Procedures (SOPs), equipment handling, and data management within an R&D setting</li>
+                        <li>Worked in a 4 person inter-disciplinary team for the development of a machine learning-based AI chatbot to automate information retrieval for manufacturability (DfM), achieving 63-87% faster search times compared to manual searches</li>
+                        <li>Engineered a complete RAG (Retrieval-Augmented Generation) pipeline using OpenAI's gpt-4o-mini, integrated with LangChain and Chroma DB for intelligent document retrieval from internal documentation</li>
+                        <li>Integrated the RAG model into Jabil's design ecosystem via cloud deployment on the DFx website</li>
+                        <li>Collaborated cross-functionally with manufacturing engineers and regulatory teams, performing verification and validation of chatbot function</li>
                     </ul>
                 </div>
             </div>
@@ -769,15 +885,38 @@
 
         <!-- Projects Section -->
         <section class="projects" id="projects">
-            <h2 class="section-title">Personal Projects</h2>
+            <h2 class="section-title">My Projects :)</h2>
             
             <div class="projects-grid">
                 <div class="project-card" onclick="openModal('modal1')">
+                    <div class="project-image">
+                        <img
+                            src="./dfx_chatbot.png"
+                            alt="DfX Chatbot screenshot"
+                            style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"
+                        >
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">AI Chatbot for Design for Manufacturability (Internship)</h3>
+                        <p class="project-description">
+                            Worked in a 4 person inter-disciplinary team for the development of a machine learning-based AI assistant to automate information retrieval for manufacturability (DfM), achieving 63-87% faster search times. Engineered a complete RAG pipeline using OpenAI's gpt-4o-mini, integrated with LangChain and Chroma vector database.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">Chroma DB</span>
+                            <span class="tech-tag">OpenAI API</span>
+                            <span class="tech-tag">RAG</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" onclick="openModal('modal2')">
                     <div class="project-image">🦾</div>
                     <div class="project-content">
                         <h3 class="project-title">Surface EMG-Controlled Prosthetic Hand</h3>
                         <p class="project-description">
-                            Designed a 3-phase development pipeline for a myoelectric prosthetic hand using surface EMG sensors and Raspberry Pi. Developed Python-based control algorithms with signal filtering to convert EMG signals into servo motor actuation with >85% response accuracy.
+                            Designed a 3-phase development pipeline for a myoelectric prosthetic hand using surface EMG sensors and Raspberry Pi. Developed Python-based control algorithms with signal filtering (moving average, hysteresis) to convert EMG signals into servo motor actuation with >85% response accuracy.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -789,14 +928,14 @@
                     </div>
                 </div>
                 
-                <div class="project-card" onclick="openModal('modal2')">
+                <div class="project-card" onclick="openModal('modal3')">
                     <div class="project-image">
                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Rw4mbitg494?si=Qfnq4o1U0dfTD_rh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border-radius: 0; display: block; pointer-events: none;"></iframe>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Microneedle Insulin Delivery Model</h3>
                         <p class="project-description">
-                            Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. Designed 3 prototype arrays using boundary layer modeling with >92% insulin uptake efficiency.
+                            Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. Designed 3 prototype arrays using boundary layer modeling and dermal and transdermal constraints; visualized >92% insulin uptake efficiency via heat maps.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">COMSOL Multiphysics</span>
@@ -807,14 +946,14 @@
                     </div>
                 </div>
                 
-                <div class="project-card" onclick="openModal('modal3')">
+                <div class="project-card" onclick="openModal('modal4')">
                     <div class="project-image">
                          <img src="./stent_1.png" alt="Coronary Stent FEA Analysis" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; display: block; pointer-events: none;">
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Coronary Stent Design and Analysis</h3>
                         <p class="project-description">
-                            Developed and evaluated three stent geometries (diamond mesh, auxetic, twisted-link) using SolidWorks and ANSYS. Simulated angioplasty loading conditions via non-linear FEA, reducing peak stress regions by >20% with >2.0 safety factor.
+                            Developed and evaluated three stent geometries (diamond mesh, auxetic, twisted-link) using SolidWorks and ANSYS. Simulated angioplasty loading conditions and vessel compliance via non-linear FEA; reduced peak stress regions by >20%. Compared materials nitinol, Ti-6Al-4V for fatigue life and radial strength.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">SolidWorks</span>
@@ -826,7 +965,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card" onclick="openModal('modal4')">
+                <div class="project-card" onclick="openModal('modal5')">
                     <div class="project-image">
                         <img src="./pfa_cath.jpg" alt="PFA Catheter Design" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0; display: block; pointer-events: none;">
                     </div>
@@ -845,7 +984,7 @@
                     </div>
                 </div>
                 
-                <div class="project-card" onclick="openModal('modal5')">
+                <div class="project-card" onclick="openModal('modal6')">
                     <div class="project-image">
                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/XLHgE2Hd5W0?si=Ge0APHot_BzP3V2E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="border-radius: 0; display: block; pointer-events: none;"></iframe>
                     </div>
@@ -865,7 +1004,39 @@
                 </div>
             </div>
         </section>
+        
 
+<div style="text-align: center; margin-top: 60px;">
+    <a href="https://github.com/akcheeto/webgl-landing" 
+       target="_blank" 
+       rel="noopener"
+       style="display: inline-block; 
+              background: rgba(255, 255, 255, 0.05); 
+              backdrop-filter: blur(10px); 
+              border: 1px solid rgba(255, 255, 255, 0.1); 
+              color: #ffffff; 
+              padding: 50px 200px; 
+              border-radius: 30px; 
+              text-decoration: none; 
+              font-size: 1.9rem; 
+              font-weight: 600; 
+              transition: all 0.3s ease; 
+              position: relative; 
+              overflow: hidden;"
+       onmouseover="this.style.background='rgba(0, 245, 255, 0.1)'; 
+                    this.style.transform='translateY(-5px) scale(1.02)'; 
+                    this.style.boxShadow='0 20px 40px rgba(0, 245, 255, 0.2)'; 
+                    this.style.borderColor='rgba(0, 245, 255, 0.3)'"
+       onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; 
+                   this.style.transform='translateY(0) scale(1)'; 
+                   this.style.boxShadow='none'; 
+                   this.style.borderColor='rgba(255, 255, 255, 0.1)'">
+        <span style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;"></span>
+            How I Made This Website!
+        </span>
+    </a>
+</div>
         <!-- Skills Section -->
         <section class="skills" id="skills">
             <h2 class="section-title">Technical Expertise</h2>
@@ -959,11 +1130,13 @@
                 </div>
                 <div class="contact-item">
                     <span>📄</span>
-                    <a href="./resume.pdf" target="_blank" download>Download Resume</a>
+                    <a href="./Akshit Monga - Biomedical Engineer.pdf" target="_blank" download>Download Resume</a>
                 </div>
             </div>
         </section>
     </main>
+
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -975,6 +1148,75 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <div class="modal-title">AI Assistant for Design for Manufacturability (DfM)</div>
+                <div class="modal-subtitle">Machine Learning-Based Information Retrieval System</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-description">
+                    As a Research and Development Intern at Jabil Circuit, Inc., I spearheaded the development of a machine learning-based AI assistant to revolutionize Design for Manufacturability (DfM) processes. Working as part of a 4-person innovation team, this project significantly improved design information retrieval efficiency, reducing search times by 63-87% compared to manual searches.
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="https://drive.google.com/file/d/1JJ6ShfaV-NqRDk7hyneXDx9FkEFW3nEl/view?usp=sharing" target="_blank" style="display: inline-block; background: rgba(0, 245, 255, 0.2); color: #00f5ff; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(0, 245, 255, 0.3)'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='rgba(0, 245, 255, 0.2)'; this.style.transform='scale(1)'">
+                        📄 View Project Poster
+                    </a>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                    <h4 style="color: #00f5ff; text-align: center; margin-bottom: 15px;">Performance Metrics</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: #00f5ff;">63%</div>
+                            <div style="color: #cccccc; font-size: 0.9rem;">Faster for Query 1</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: #00f5ff;">87%</div>
+                            <div style="color: #cccccc; font-size: 0.9rem;">Faster for Query 2</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: #00f5ff;">7.4x</div>
+                            <div style="color: #cccccc; font-size: 0.9rem;">Peak Speed Gain</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-details">
+                    <div class="modal-detail-section">
+                        <h4>Technical Implementation</h4>
+                        <ul>
+                            <li>Engineered a complete RAG (Retrieval-Augmented Generation) pipeline using OpenAI's gpt-4o-mini</li>
+                            <li>Integrated with LangChain and Chroma vector database for intelligent document retrieval</li>
+                            <li>Achieved high relevance and accuracy by retrieving top-5 contextually matched document chunks using vector similarity</li>
+                            <li>Built chatbot interface with Gradio and deployed on cloud servers</li>
+                            <li>Created custom script to read and break down documents into small, searchable pieces</li>
+                        </ul>
+                    </div>
+                    <div class="modal-detail-section">
+                        <h4>Performance & Impact</h4>
+                        <ul>
+                            <li>Reduced information retrieval time by 63-87% (2.8-7.4 times faster than manual search)</li>
+                            <li>OpenAI's API outperformed Amazon Q and MS Copilot in cost-efficiency, speed, and response quality</li>
+                            <li>Integrated the RAG model into Jabil's design ecosystem via cloud deployment on the DFx website</li>
+                            <li>Significantly reduced time spent searching for manufacturing guidelines</li>
+                            <li>Helped prevent costly design errors by providing immediate, accurate responses</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-tech">
+                    <span class="modal-tech-tag">Python</span>
+                    <span class="modal-tech-tag">LangChain</span>
+                    <span class="modal-tech-tag">Chroma DB</span>
+                    <span class="modal-tech-tag">OpenAI API</span>
+                    <span class="modal-tech-tag">RAG</span>
+                    <span class="modal-tech-tag">Gradio</span>
+                    <span class="modal-tech-tag">NLP</span>
+                    <span class="modal-tech-tag">Machine Learning</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
                 <div class="modal-title">Surface EMG-Controlled Prosthetic Hand</div>
                 <div class="modal-subtitle">Advanced Myoelectric Control System</div>
             </div>
@@ -986,21 +1228,21 @@
                     <div class="modal-detail-section">
                         <h4>Technical Achievements</h4>
                         <ul>
-                            <li>Developed 3-phase pipeline: signal acquisition, processing, and motor control</li>
-                            <li>Achieved >85% response accuracy in gesture recognition</li>
-                            <li>Implemented real-time signal filtering and noise reduction</li>
-                            <li>Created custom 3D-printed mechanical components</li>
-                            <li>Integrated multiple servo motors for finger articulation</li>
+                            <li>Designed a 3-phase development pipeline for a myoelectric prosthetic hand</li>
+                            <li>Developed Python-based control algorithms with signal filtering (moving average, hysteresis)</li>
+                            <li>Converted EMG signals into servo motor actuation with >85% response accuracy</li>
+                            <li>Designed and 3D printed finger and hand components in PLA, PETG, TPU</li>
+                            <li>Integrated tendon routing and servo-based actuation for individual finger and wrist movement</li>
                         </ul>
                     </div>
                     <div class="modal-detail-section">
                         <h4>Key Features</h4>
                         <ul>
-                            <li>Non-invasive surface EMG sensor array</li>
-                            <li>Raspberry Pi-based control system</li>
-                            <li>Machine learning for gesture classification</li>
-                            <li>Modular design for easy maintenance</li>
-                            <li>Cost-effective manufacturing approach</li>
+                            <li>Built scalable DOF control logic to support full-hand coordination</li>
+                            <li>Implemented modular control framework for both EMG and potentiometer-assisted inputs</li>
+                            <li>Conducted iterative testing, refining mechanical tolerances and control thresholds</li>
+                            <li>Optimized system responsiveness over 10+ iterations</li>
+                            <li>Non-invasive surface EMG sensor array with Raspberry Pi control</li>
                         </ul>
                     </div>
                 </div>
@@ -1017,20 +1259,20 @@
         </div>
     </div>
 
-    <div id="modal2" class="modal">
+    <div id="modal3" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
                 <iframe class="modal-video" src="https://www.youtube.com/embed/Rw4mbitg494?si=3QgCcs77x8iKC2s1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <div class="modal-title">Microneedle Insulin Delivery Model</div>
                 <div class="modal-subtitle">Advanced Drug Delivery Simulation</div>
             </div>
             <div class="modal-body">
                 <div class="modal-description">
-                    I developed a 2D COMSOL model to simulate the diffusion of insulin through microneedle arrays into the dermis and epidermis. By fine-tuning initial concentration and therapeutic dosage, I ensured efficacious concentrations of insulin within clinical use. My analysis included generating heat maps and concentration profiles, optimizing microneedle geometry, and proposing improvements for more accurate in vivo simulations.
+                    Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. By fine-tuning initial concentration and therapeutic dosage, I ensured efficacious concentrations of insulin within clinical use. My analysis included generating heat maps and concentration profiles, optimizing microneedle geometry, and proposing improvements for more accurate in vivo simulations.
                 </div>
                 <div class="modal-description" style="margin-top: 20px;">
-                    COMSOL was quite a difficult program to learn from the ground up, and I was met with a slew of problems. It took me at least a week of trouble shooting to get my fluids to flow in the right direction. I reconstructed my model at least 10 times over multiple weeks, and some of the problems ended up being the easiest fix of ticking a single box.
+                    COMSOL was quite a difficult program to learn from the ground up, and I was met with a slew of problems. It took me at least a week of trouble shooting to get my fluids to flow in the right direction. I reconstructed my model at least 10 times over multiple weeks, and some of my most frustrating problems ended up being just ticking a single box.
                 </div>
                 
                 <!-- Simulation Visualizations -->
@@ -1052,21 +1294,11 @@
                     <div class="modal-detail-section">
                         <h4>Simulation Features</h4>
                         <ul>
-                            <li>2D COMSOL Multiphysics modeling environment</li>
-                            <li>Boundary layer analysis for drug diffusion</li>
-                            <li>Circadian rhythm incorporation in kinetic models</li>
-                            <li>Geometric optimization algorithms</li>
-                            <li>Multi-physics coupling (fluid-structure interaction)</li>
-                        </ul>
-                    </div>
-                    <div class="modal-detail-section">
-                        <h4>Research Outcomes</h4>
-                        <ul>
-                            <li>Achieved >92% insulin uptake efficiency</li>
-                            <li>Designed 3 optimized prototype arrays</li>
-                            <li>Validated biocompatible resin materials</li>
-                            <li>Demonstrated painless insertion mechanism</li>
-                            <li>Established manufacturing protocols</li>
+                            <li>Designed 3 prototype arrays using boundary layer modeling</li>
+                            <li>Applied dermal and transdermal constraints</li>
+                            <li>Visualized >92% insulin uptake efficiency via heat maps</li>
+                            <li>3D-printed a MVP of needle array with biocompatible resins</li>
+                            <li>Tested dose uniformity via agarose diffusion</li>
                         </ul>
                     </div>
                 </div>
@@ -1075,23 +1307,23 @@
                     <span class="modal-tech-tag">Biocompatible Resins</span>
                     <span class="modal-tech-tag">3D Printing</span>
                     <span class="modal-tech-tag">Drug Delivery</span>
-                    <span class="modal-tech-tag">Finite Element Analysis</span>
+                    <span class="modal-tech-tag">Fluid Simulation</span>
                     <span class="modal-tech-tag">Fluid Dynamics</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="modal3" class="modal">
+    <div id="modal4" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <span class="close" onclick="closeModal('modal4')">&times;</span>
                 <div class="modal-title">Coronary Stent Design and Analysis</div>
                 <div class="modal-subtitle">Advanced Cardiovascular Device Engineering</div>
             </div>
             <div class="modal-body">
                 <div class="modal-description">
-                    My team and I developed various stent configurations using SolidWorks and Finite Element Analysis to address restenosis. We modeled various stent configurations and evaluated their mechanical performance under physiological conditions. Through simulating multiple materials, designs, and sizes we were able to suggest designs that exhibited the most optimal balance of yield strength and durability. We balanced different meshing methods, factory of safety, Von Mises stress, displacement, and modeled stress v strain curves.
+                    My team and I developed and evaluated three stent geometries (diamond mesh, auxetic, twisted-link) using SolidWorks and ANSYS to address restenosis. We simulated angioplasty loading conditions and vessel compliance via non-linear FEA, reducing peak stress regions by >20%. Through comparing materials nitinol and Ti-6Al-4V for fatigue life and radial strength, we validated designs with >2.0 safety factor.
                 </div>
                 <div class="modal-description" style="margin-top: 20px;">
                     I always wanted to familiarize myself with manufacturing and CAD modeling software, and I was happy to work on one of the medical devices that inspired me to pursue BME. I really enjoyed researching this and would love to revisit this in the future.
@@ -1128,20 +1360,20 @@
                     <div class="modal-detail-section">
                         <h4>Design Innovations</h4>
                         <ul>
-                            <li>Diamond mesh geometry for optimal radial strength</li>
-                            <li>Auxetic structure for enhanced flexibility</li>
-                            <li>Twisted-link design for improved deliverability</li>
-                            <li>Nitinol material optimization</li>
-                            <li>Surface modification for biocompatibility</li>
+                            <li>Created crimp-expansion models with balloon catheter systems</li>
+                            <li>Fabricated MVP using resin stereolithography</li>
+                            <li>Mechanically tested prototypes in Instron</li>
+                            <li>Optimized expansion characteristics for vessel deployment</li>
+                            <li>Enhanced surface modification for biocompatibility</li>
                         </ul>
                     </div>
                     <div class="modal-detail-section">
                         <h4>Analysis Results</h4>
                         <ul>
-                            <li>Reduced peak stress regions by >20%</li>
-                            <li>Achieved >2.0 safety factor under loading</li>
-                            <li>Optimized expansion characteristics</li>
-                            <li>Minimized vessel wall trauma</li>
+                            <li>Reduced peak stress regions by >20% through geometry optimization</li>
+                            <li>Achieved >2.0 safety factor under physiological loading conditions</li>
+                            <li>Validated fatigue life exceeding 10 million cycles</li>
+                            <li>Minimized vessel wall trauma through auxetic design</li>
                             <li>Enhanced long-term patency predictions</li>
                         </ul>
                     </div>
@@ -1158,10 +1390,10 @@
         </div>
     </div>
 
-    <div id="modal4" class="modal">
+    <div id="modal5" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('modal4')">&times;</span>
+                <span class="close" onclick="closeModal('modal5')">&times;</span>
                 <img class="modal-image" src="./pfa_cath.jpg" alt="PFA Catheter Design">
                 <div class="modal-title">PFA Catheter Design & Research</div>
                 <div class="modal-subtitle">Next-Generation Cardiac Ablation Technology</div>
@@ -1204,10 +1436,10 @@
         </div>
     </div>
 
-    <div id="modal5" class="modal">
+    <div id="modal6" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <span class="close" onclick="closeModal('modal5')">&times;</span>
+                <span class="close" onclick="closeModal('modal6')">&times;</span>
                 <iframe class="modal-video" src="https://www.youtube.com/embed/XLHgE2Hd5W0?si=7LGw0VbidusVCfQn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <div class="modal-title">Finger Prosthesis Assembly</div>
                 <div class="modal-subtitle">3D CAD Design and Modeling Project</div>
@@ -1249,6 +1481,7 @@
             </div>
         </div>
     </div>
+    
 
     <script>
         // Create animated background particles

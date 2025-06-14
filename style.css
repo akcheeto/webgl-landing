@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@font-face {
+  font-family: 'Black Chancery';
+  src: url('fonts/BlackChancery.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 html, body {
   margin: 0;
@@ -20,8 +27,8 @@ html, body {
 }
 
 .playground {
-  z-index: 1; /* Ensure it's above the WebGL canvas */
-  pointer-events: none; /* Prevent accidental hover/click events */
+  z-index: 1;
+  pointer-events: none; 
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -64,8 +71,8 @@ a {
 }
 
 .portfolio-content {
-  background-color: transparent;        /* fully transparent body */
-  border: 0px solid #222;               /* dark grey outline */
+  background-color: transparent;        
+  border: 0px solid #222;               
   border-radius: 20px;
   padding: 30px 40px;
   display: flex;
@@ -75,7 +82,7 @@ a {
 }
 
 .portfolio-button:hover .portfolio-content {
-  background-color: #444;     /* match the inner circle */
+  background-color: #444;    
   border-color: #444;
 }
 
@@ -101,20 +108,35 @@ a {
 
 .ps-note {
   position: fixed;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-style: italic;
-  z-index: 1000;
+  top: 50%;
+  left: 2.5rem;                /* shift bubble right */
+  transform: translate(0, -50%);
+  background: #505050;
+  color: #000;
+  font-family: 'Black Chancery', cursive;
+  font-size: 2rem;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
   pointer-events: none;
-  transition: all 0.6s ease;
+  z-index: 1000;
+  overflow: visible;         /* allow pseudo-element to show outside */
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.ps-note::before {
+  content: '';
+  position: absolute;
+  left: -1.3rem;               /* move base of triangle further left */
+  top: 49.5%;
+  transform: translateY(-50%);
+  border-top: 2rem solid transparent;
+  border-bottom: 2rem solid transparent;
+  border-right: 2rem solid #505050;  /* larger “carrot” */
+  z-index: -1;
 }
 
 
 .ps-note.hide {
-  transform: translateY(100px) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.5);
   opacity: 0;
 }
-
