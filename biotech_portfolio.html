@@ -941,9 +941,9 @@ function toggleResume() {
                 <div class="project-card" onclick="openModal('modal2')">
                     <div class="project-image">🦾</div>
                     <div class="project-content">
-                        <h3 class="project-title">Surface EMG-Controlled Prosthetic Hand</h3>
+                        <h3 class="project-title">"MyoGrip" EMG Prosthetic Hand</h3>
                         <p class="project-description">
-                            Designed a 3-phase development pipeline for a myoelectric prosthetic hand using surface EMG sensors and Raspberry Pi. Developed Python-based control algorithms with signal filtering (moving average, hysteresis) to convert EMG signals into servo motor actuation with >85% response accuracy.
+                            Designed a 3-phase development pipeline for a myoelectric prosthetic hand using surface EMG sensors and Raspberry Pi. Developed Python-based Machine Learning model with signal filtering to convert EMG signals into servo motor actuation with ~60% response accuracy.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -962,7 +962,7 @@ function toggleResume() {
                     <div class="project-content">
                         <h3 class="project-title">Microneedle Insulin Delivery Model</h3>
                         <p class="project-description">
-                            Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. Designed 3 prototype arrays using boundary layer modeling and dermal and transdermal constraints; visualized >92% insulin uptake efficiency via heat maps.
+                            Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. Designed 3 prototype arrays using boundary layer modeling and dermal and transdermal constraints; visualized insulin uptake efficiency via heat maps.
                         </p>
                         <div class="project-tech">
                             <span class="tech-tag">COMSOL Multiphysics</span>
@@ -1249,15 +1249,14 @@ function toggleResume() {
             </div>
             <div class="modal-body">
                 <div class="modal-description">
-                    This project represents a comprehensive approach to developing an affordable, high-performance prosthetic hand using surface electromyography (EMG) sensors. The system captures muscle electrical activity from the residual limb and translates it into precise hand movements through advanced signal processing algorithms.
-                </div>
+                    I’ve always been fascinated by brain-computer interfaces and it would be my dream to work on or develop BCIs in the future. It was what got me into Biomedical Engineering. Thus, I wanted to see what I could make after getting my BME degree. I built this simple myoelectric hand as my first step toward that goal. The system uses surface EMG sensors placed on the forearm to capture muscle electrical activity, which is filtered and processed in real time by custom Python control algorithms. These signals are then mapped to servo motors that articulate joints and fingers- all 3D printed on my modded Ender 3.                  </div>
                 <div class="modal-details">
                     <div class="modal-detail-section">
                         <h4>Technical Achievements</h4>
                         <ul>
                             <li>Designed a 3-phase development pipeline for a myoelectric prosthetic hand</li>
                             <li>Developed Python-based control algorithms with signal filtering (moving average, hysteresis)</li>
-                            <li>Converted EMG signals into servo motor actuation with >85% response accuracy</li>
+                            <li>Converted EMG signals into servo motor actuation with a ML model to optimize response accuracy</li>
                             <li>Designed and 3D printed finger and hand components in PLA, PETG, TPU</li>
                             <li>Integrated tendon routing and servo-based actuation for individual finger and wrist movement</li>
                         </ul>
@@ -1265,11 +1264,10 @@ function toggleResume() {
                     <div class="modal-detail-section">
                         <h4>Key Features</h4>
                         <ul>
-                            <li>Built scalable DOF control logic to support full-hand coordination</li>
-                            <li>Implemented modular control framework for both EMG and potentiometer-assisted inputs</li>
+                            <li>Implemented modular control through EMG controlled mapped inputs</li>
                             <li>Conducted iterative testing, refining mechanical tolerances and control thresholds</li>
                             <li>Optimized system responsiveness over 10+ iterations</li>
-                            <li>Non-invasive surface EMG sensor array with Raspberry Pi control</li>
+                            <li>The signal is retrieved through non-invasive surface Myoware sensors connected to a Raspberry Pi</li>
                         </ul>
                     </div>
                 </div>
@@ -1299,7 +1297,7 @@ function toggleResume() {
                     Engineered a 2D COMSOL simulation for microneedle-based insulin delivery, capturing circadian drug kinetics and optimizing needle geometry. By fine-tuning initial concentration and therapeutic dosage, I ensured efficacious concentrations of insulin within clinical use. My analysis included generating heat maps and concentration profiles, optimizing microneedle geometry, and proposing improvements for more accurate in vivo simulations.
                 </div>
                 <div class="modal-description" style="margin-top: 20px;">
-                    COMSOL was quite a difficult program to learn from the ground up, and I was met with a slew of problems. It took me at least a week of trouble shooting to get my fluids to flow in the right direction. I reconstructed my model at least 10 times over multiple weeks, and some of my most frustrating problems ended up being just ticking a single box.
+                    COMSOL was quite a difficult program to learn from the ground up, and I was met with a slew of problems. It took me at least a week of trouble shooting to get my fluids to flow in the right direction. I reconstructed my model at least 10 times over multiple weeks, and some of my most frustrating problems were solved by ticking a single box I didn't know existed.
                 </div>
                 
                 <!-- Simulation Visualizations -->
@@ -1313,7 +1311,7 @@ function toggleResume() {
                 
                 <div class="modal-description" style="margin-top: 30px;">
                     <h4 style="color: #00f5ff; font-size: 1.3rem; margin-bottom: 15px;">Concentration Results</h4>
-                    <p>This graph displays the concentration at different time intervals, as you move downwards through the needle vertically. I cut the model vertically, and modeled diffusion down the cut. Different lines display different time intervals of insulin diffusion.</p>
+                    <p>This graph displays the concentration at different time intervals (Different Lines) as you move downwards through the needle vertically. I cut the model vertically, and modeled diffusion down the cut. Different lines display different time intervals of insulin diffusion.</p>
                     <p style="margin-top: 20px;">The most efficient transfer of insulin over time was through an array of 256 needles with the measurements and parameters listed in the table. This project was quite tedious at times, but very rewarding. It took me a few weeks of research, then a few additional weeks to learn COMSOL and model the array. Overall, quite enjoyable and provided me some very satisfying visuals!</p>
                 </div>
                 

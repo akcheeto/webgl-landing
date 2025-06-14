@@ -165,8 +165,14 @@ a {
 
 /* ———————— Show only on phones/tablets ———————— */
 @media (max-width: 600px) {
+  .playground {
+    display: none;
+  }
   #mobileOverlay {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   /* mobile background override */
   body.mobile {
@@ -189,3 +195,4 @@ a {
     border-right: 1.2rem solid #505050;
   }
 }
+
